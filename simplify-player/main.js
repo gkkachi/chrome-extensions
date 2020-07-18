@@ -20,6 +20,9 @@ function main () {
 
     nodesToRemove.flat().filter(x => x && x.remove).forEach(x => x.remove());
     nodeToFullWidth && toFullWidth(nodeToFullWidth);
+
+    // Refresh
+    window.dispatchEvent(new Event('resize'));
 }
 
 function toFullWidth(node) {
