@@ -6,7 +6,8 @@
     "content_scripts": [
         {
             "matches": [
-                "http://schoo.jp/class/*/room"
+                "http://schoo.jp/class/*/room",
+                "https://www.youtube.com/watch?v=*"
             ],
             "js": ["main.js"]
         }
