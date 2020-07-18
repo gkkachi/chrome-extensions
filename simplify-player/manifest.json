@@ -1,0 +1,14 @@
+{
+    "name": "Simplify Media Players",
+    "version": "1.0",
+    "description": "Simplify media players by removing unnecessary nodes.",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": [
+                "http://schoo.jp/class/*/room"
+            ],
+            "js": ["main.js"]
+        }
+    ]
+}
