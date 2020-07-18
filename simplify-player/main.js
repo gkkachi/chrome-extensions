@@ -1,5 +1,9 @@
 function main () {
     const hostName = document.location.hostname;
+    const pathName = document.location.pathname;
+
+    const vid = document.getElementsByTagName('video')[0];
+    const ratio = vid ? (vid.videoHeight / vid.videoWidth) : (9 / 16);
 
     let ids = [];
     let classNames = [];
@@ -8,11 +12,12 @@ function main () {
     if (hostName === 'schoo.jp') {
         ids = ['room_sub_mod', 'roomHeader', 'head_bar_mod', 'tools_mod', 'desk_mod'];
         classNames = ['twinkle01', 'twinkle02', 'actionNavi'];
-        nodesToFullWidth = [document.getElementById('screen')];
+        nodesToFullWidth = [vid, document.getElementById('jwplayer')];
     } else if (hostName === 'www.youtube.com') {
-        ids = ['masthead-container', 'items', 'info', 'meta', 'ticket-shelf', 'merch-shelf', 'comments'];
+        if (pathName !== '/watch') return;
+        ids = ['masthead-container', 'items', 'info', 'meta', 'ticket-shelf', 'merch-shelf', 'comments', 'secondary'];
         nodesToFullWidth = [
-           document.getElementsByTagName('video')[0],
+           vid,
            document.getElementById('ytd-player'),
         ];
     } else {
@@ -25,19 +30,19 @@ function main () {
     ];
 
     nodesToRemove.flat().filter(x => x).forEach(x => x.remove());
-    nodesToFullWidth.map(toFullWidth);
+    nodesToFullWidth.map(x => toFullWidth(x, ratio));
 
     // Refresh
     window.dispatchEvent(new Event('resize'));
 }
 
-function toFullWidth(node) {
+function toFullWidth(node, ratio) {
     node.style.position = 'fixed';
     node.style.top = '0px';
     node.style.left = '0px';
     node.style.width = '100vw';
-    node.style.height = 'calc(min(100vw * 9 / 16, 100vh))';
-    node.style.margin = '0px';
+    node.style.height = `calc(min(100vw * ${ratio}, 100vh))`;
+    node.style.margin = 'auto';
     node.style.padding = '0px';
 }
 

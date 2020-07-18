@@ -7,7 +7,7 @@
         {
             "matches": [
                 "http://schoo.jp/class/*/room",
-                "https://www.youtube.com/watch?v=*"
+                "https://www.youtube.com/*"
             ],
             "js": ["main.js"]
         }
